@@ -78,7 +78,7 @@ def reset_game():
 	score = 0
 	return score
 
-# Kus sinifinin tanimi, ozelliklerin ve animasyonlarin olusturulmasi
+# Kus sinifinin tanimi, ozelliklerin ve animasyonlarin olusturulmasi(Alperen cevik)
 class Bird(pygame.sprite.Sprite):
 
 	def __init__(self, x, y):
