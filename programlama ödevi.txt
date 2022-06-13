@@ -1,0 +1,18 @@
+Bilgisayarda Programlama 1
+Ödev içeriði : Flappy Bird
+
+Yardým alýnacak kaynaklar
+PyGame 
+Awesome-Python.com
+inventwithpython.com
+Oyunun ilk hali
+ https://www.youtube.com/watch?v=GiUGVOqqCKg
+
+
+
+Alperen Çevik                   Yaðmur Umutlu                          Emre Kurt
+Github Kullanýcý isimleri;
+AlperenÇevikUU			yagmurumtl0			222080548	
+222080558                         222180510                               222080548
+
+
