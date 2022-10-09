@@ -2,41 +2,41 @@ import pygame
 from pygame.locals import *
 import random
 import os
-# pygame'e ait genel ve ses icin baslatma fonksiyonlari(Alperen cevik)
+# pygame'e ait genel ve ses icin baslatma fonksiyonlari
 pygame.init()
 pygame.mixer.init()
-# Oyunun kare hizinin ayarlanmasi(Alperen Cevik)
+# Oyunun kare hizinin ayarlanmasi
 clock = pygame.time.Clock()
 fps = 60
-# pencere boyutunun piksel olarak belirlenmesi (yagmur umutlu)
+# pencere boyutunun piksel olarak belirlenmesi 
 screen_width = 864
 screen_height = 936
-# girilen piksellerin pencereye tanimlanmasi ve pencerenin isminin atanmasi (yagmur umutlu)
+# girilen piksellerin pencereye tanimlanmasi ve pencerenin isminin atanmasi 
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Flappy Bird by Alperen,Yagmur, Emre')
+pygame.display.set_caption('Flappy Bird by Alperen')
 
-# Yazi tiplerinin ve boyutlarinin ayarlanmasi(Alperen Cevik)
+# Yazi tiplerinin ve boyutlarinin ayarlanmasi
 font = pygame.font.SysFont('Impact', 60)
 text_font = pygame.font.SysFont('Impact', 42)
 menu_font = pygame.font.SysFont('Impact', 32)
 
-#renkleri tanimlama(Emre Kurt)
+#renkleri tanimlama
 white = (255, 255, 255)
 black = (0, 0, 0)
 coral = (255, 105, 105)
 orange = (255, 105, 30)
 gray = (119, 136, 153)
 
-#// oyun degiskenlerini tanimlama(Alperen Cevik)
+#// oyun degiskenlerini tanimlama
 flying = False
 game_over = False
-score = 0 #baslangictaki skorun tanimlanmasi(Alperencevik)
+score = 0 #baslangictaki skorun tanimlanmasi
 death_count = 0
-death_count_text = "Death Count:" #olme sayisi(alperen cevik)
-score_text = "Score :" #anlik skor(Alperen)
-best_text = "Best :" #yapilan en iyi skor(Alperen)
-start_text = "Click Anywhere to Start" #baslamak icin herhangi bir yere tiklayin yazisi(Alperen)
-scroll_speed = 4 # kusun ve ekranin kayma hizi(Alperen)
+death_count_text = "Death Count:" #olme sayisi
+score_text = "Score :" #anlik skor
+best_text = "Best :" #yapilan en iyi skor
+start_text = "Click Anywhere to Start" #baslamak icin herhangi bir yere tiklayin yazisi
+scroll_speed = 4 # kusun ve ekranin kayma hizi
 pipe_gap = 250 #boruların ortasindaki boslukların genisligi(Alperen)
 pipe_frequency = 1500 #borularin spawn olma sikligi(Alperen)
 ground_scroll = 0
@@ -66,7 +66,7 @@ high_score_img = pygame.image.load('img/highscore.png')#new high score resminin 
 menu_img = pygame.image.load('img/menu.png')#menu arka plani(alperen)
 leftclick = pygame.image.load('img/left2.png')#oyun baslamadan ekrana cikan click resmi(alperen)
 
-# Ekrana metin ciktisi veren komut(Emre Kurt)
+# Ekrana metin ciktisi veren komut
 def draw_text(text, font, text_col, x, y):
 	img = font.render(text, True, text_col)
 	screen.blit(img, (x, y))
@@ -78,7 +78,7 @@ def reset_game():
 	score = 0#yaninca skoru 0 yapan komut(Alperen)
 	return score
 
-# Kus sinifinin tanimi, ozelliklerin ve animasyonlarin olusturulmasi (yagmur umutlu)
+# Kus sinifinin tanimi, ozelliklerin ve animasyonlarin olusturulmasi 
 class Bird(pygame.sprite.Sprite):
 
 	def __init__(self, x, y):
@@ -86,7 +86,7 @@ class Bird(pygame.sprite.Sprite):
 		self.images = []
 		self.index = 0
 		self.counter = 0
-		#Kusların ekranda ki resimleri(Emre Kurt)
+		#Kusların ekranda ki resimleri
 		for num in range (1, 4):
 			img = pygame.image.load(f"img/bird{num}.png")
 			self.images.append(img)
@@ -96,30 +96,30 @@ class Bird(pygame.sprite.Sprite):
 		self.vel = 0
 		self.clicked = False
 
-		#animasyon gorsellerini tutacak self.images isimli listeyi olusturur (yagmur umutlu)
+		#animasyon gorsellerini tutacak self.images isimli listeyi olusturur 
 
-		#index , counter , velocity ve clicked'in baslangic degerleriyle tanimlanmasi (yagmur umutlu)
+		#index , counter , velocity ve clicked'in baslangic degerleriyle tanimlanmasi 
 
 
-		#animasyonun for dongusuyle ayarlanmasi (yagmur umutlu)
+		#animasyonun for dongusuyle ayarlanmasi 
 
-	    #koordinat girisi icin hazirlik (yagmur umutlu)
+	    #koordinat girisi icin hazirlik 
 
-	#Eger Kus ucuyorsa vel degerini 0.5 artirarak asagi dusmesini yani yercekimini saglar(Alperen cevik)
+	#Eger Kus ucuyorsa vel degerini 0.5 artirarak asagi dusmesini yani yercekimini saglar
 	def update(self):
 
 		if flying == True:
-			#Yercekimi uygulayan komut(Emre Kurt)
+			#Yercekimi uygulayan komut
 			self.vel += 0.5
 			if self.vel > 8:
 				self.vel = 8
 			if self.rect.bottom < 768:
 				self.rect.y += int(self.vel)
 				
-				#maximum hizi 8 , vel degerine gore yukari asagi hareketi saglayan komut satiri (yagmur umutlu)
+				#maximum hizi 8 , vel degerine gore yukari asagi hareketi saglayan komut satiri 
 
 		if game_over == False:
-			#Zıplama komutu (Emre Kurt)
+			#Zıplama komutu 
 			if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
 				self.clicked = True
 				pygame.mixer.Sound.play(jmp_snd)
@@ -127,10 +127,10 @@ class Bird(pygame.sprite.Sprite):
 			if pygame.mouse.get_pressed()[0] == 0:
 				self.clicked = False
 				
-				#eger yanmadiysak mause basilisini algılar, clicked degerini gunceller (yagmur umutlu)
-				#kusun vel degerini degistirerek ziplamayi saglar ve ziplama sesini oynatir (yagmur umutlu)
+				#eger yanmadiysak mause basilisini algılar, clicked degerini gunceller 
+				#kusun vel degerini degistirerek ziplamayi saglar ve ziplama sesini oynatir 
 
-			#Gorsellerin belirli zaman araliklariyla listeye eklenip cikarilmasiyla animasyonun olusmasi(Alperen cevik)
+			#Gorsellerin belirli zaman araliklariyla listeye eklenip cikarilmasiyla animasyonun olusmasi
 
 			flap_cooldown = 5
 			self.counter += 1
@@ -151,7 +151,7 @@ class Bird(pygame.sprite.Sprite):
 			#eger yandiysak kusun kafasinin yere bakmasini saglar(Alperen Cevik)
 			self.image = pygame.transform.rotate(self.images[self.index], -90)
 
-			#eger yanmadiysak kusun vel degerine gore kafasinin yukari veya asagi bakmasini saglar (yagmur umutlu)
+			#eger yanmadiysak kusun vel degerine gore kafasinin yukari veya asagi bakmasini saglar 
 			
 
 
@@ -176,7 +176,7 @@ class Pipe(pygame.sprite.Sprite):
 		if self.rect.right < 0:
 			self.kill()
 
-			#self.image ile boruya gorsellik saglar (yagmur umutlu)
+			#self.image ile boruya gorsellik saglar 
 		
 
 
@@ -224,17 +224,17 @@ while run:
 
 	clock.tick(fps)
 
-	#Arka planı cizer(Emre Kurt)
+	#Arka planı cizer
 	screen.blit(bg, (0,0))
 
 	pipe_group.draw(screen)
 	bird_group.draw(screen)
 	bird_group.update()
 
-	#Zemini cizer ve kaydırır(Emre Kurt)
+	#Zemini cizer ve kaydırır
 	screen.blit(ground_img, (ground_scroll, 768))
 
-	#Puanı kontrol eden algoritmanin olusturulmasi(Emre Kurt)
+	#Puanı kontrol eden algoritmanin olusturulmasi
 	if len(pipe_group) > 0:
 		if bird_group.sprites()[0].rect.left > pipe_group.sprites()[0].rect.left\
 			and bird_group.sprites()[0].rect.right < pipe_group.sprites()[0].rect.right\
@@ -249,19 +249,19 @@ while run:
 	draw_text(str(death_count_text), text_font, white, 20, int(screen_height) - 60)
 	draw_text(str(death_count), font, coral, 240, int(screen_height) - 75)
 
-	#Baslatmak icin tıklama komutu(Emre Kurt)
+	#Baslatmak icin tıklama komutu
 	if pygame.mouse.get_pressed()[0] == 0 and flying == False and game_over == False:
 		draw_text(str(start_text), font, white, 150, 300)
 		screen.blit(leftclick, ( (screen_width / 2) + 50 , (screen_height / 2) - 80 ))
 
-		#screen.blit fonksiyonu ile arka planin, yer yuzunun, baslangic ekranindaki yazi ve resimlerin, menu resimleri ve tesxtleri vb.seylerin cizdirilmesi (yagmur umutlu)
+		#screen.blit fonksiyonu ile arka planin, yer yuzunun, baslangic ekranindaki yazi ve resimlerin, menu resimleri ve tesxtleri vb.seylerin cizdirilmesi 
 		#draw_text ile yazi yazdirilmasi (yagmur umutlu)
-		#kusun borunun en sol koordinati ile en sag koordinati arasindaki gecis kontrol edilerek skor kazanma isleminin yapilmasi (yagmur umutlu)
-		#eger mouse basili degilse, kus halihazirda ucmuyorsa ve yanmadiysak baslangic ekraninin olusturulmasi (yagmur umutlu)
+		#kusun borunun en sol koordinati ile en sag koordinati arasindaki gecis kontrol edilerek skor kazanma isleminin yapilmasi 
+		#eger mouse basili degilse, kus halihazirda ucmuyorsa ve yanmadiysak baslangic ekraninin olusturulmasi 
 
 
 
-	#Zorluk ayari(Emre Kurt)
+	#Zorluk ayari
 	if score == 7:
 		scroll_speed = 4.5
 		pipe_gap = 240
@@ -313,7 +313,7 @@ while run:
 	if flappy.rect.bottom >= 768:
 		game_over = True
 		flying = False
-		#Oyun sonu bitis müzigi(Emre Kurt)
+		#Oyun sonu bitis müzigi
 		if high_score >= score:
 			pygame.mixer.Sound.play(death_snd)
 
@@ -340,7 +340,7 @@ while run:
 	# ve degerleri(skoru) hesaplayan ve sonra reset atmamizi saglayan komutlar
 	if game_over == True:
 
-		#En yüksek puan kontrolü(Emre Kurt)
+		#En yüksek puan kontrolü
 		if high_score >= score:
 			screen.blit(gameover_img, ( (screen_width / 2) - (426 / 2) , (screen_height / 2) - 250 ))
 		else:
@@ -353,28 +353,28 @@ while run:
 		draw_text(str(best_text), menu_font, white, (screen_width / 2)-44, (screen_height / 2)+ 115)
 		draw_text(str(high_score), menu_font, gray, (screen_width / 2)+34, (screen_height / 2) + 117)
 
-		#reset butonu tıklama tusu(Emre Kurt)
+		#reset butonu tıklama tusu
 		if button.draw():
 			death_count += 1
 			game_over = False
 
 			pygame.mixer.Sound.play(rst_snd)
 
-			#En yüksek puan ataması(Emre Kurt)
+			#En yüksek puan ataması
 			if high_score < score:
 				savefile = open('saves/data.txt','r+')
 				high_score = score
 				savefile.write(str(high_score))
 				savefile.close()
 
-			#Zorluk sıfırlama(Emre Kurt)
+			#Zorluk sıfırlama
 			scroll_speed = 4
 			pipe_gap = 250
 			pipe_frequency = 1500
 
 			score = reset_game()
 
-#Kusun ucmasını ve yanısını anlayan komut(Emre Kurt)
+#Kusun ucmasını ve yanısını anlayan komut
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			run = False
